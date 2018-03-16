@@ -28,5 +28,4 @@
     <!--开启这个配置，spring才能识别@Scheduled注解-->
     <task:annotation-driven/>
 
-
 </beans>

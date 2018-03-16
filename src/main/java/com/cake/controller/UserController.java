@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,7 +20,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    public UserController() {
+    UserController() {
         System.out.println("初始化 demo 控制器");
     }
 
@@ -32,17 +30,22 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/hello")
-    private String hello() {
+    public String Hello() {
         return "hello";
     }
 
     @ResponseBody
+    @RequestMapping("/requestIn")
+    public int RequestIn(@RequestParam(value = "sign", required = false, defaultValue = "") int sign) {
+        return sign;
+    }
+
+    @ResponseBody
     @RequestMapping("/loadAllUser")
-    private List<User> LoadAllUser(@RequestParam(value = "sign", required = false, defaultValue = "") int sign) {
+    public List<User> LoadAllUser() {
         List<User> list = null;
         try {
-            if (sign == 1)
-                list = userService.loadAllUser();
+            list = userService.loadAllUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
